@@ -154,3 +154,67 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px dashed
   color: var(--rojo); font-weight: 800; box-shadow: 3px 3px 0 var(--tinta);
 }
 @media (prefers-reduced-motion: reduce) { .boton-toque, .grande { transition: none; } }
+
+/* ---------- Fase 4: partida, preguntas, marcador ---------- */
+.reglas { margin: 0; font-size: 14px; color: var(--tinta); background: var(--crema); border: 2px dashed var(--cafe); border-radius: 10px; padding: 8px 12px; }
+.partida { display: flex; flex-direction: column; gap: 14px; }
+.ronda { margin: 0; font-family: var(--display); font-size: 24px; letter-spacing: .04em; }
+.escenario { position: relative; }
+
+.pregunta {
+  position: absolute; inset: 0; overflow: auto;
+  display: flex; flex-direction: column; justify-content: center; gap: 1.4vw;
+  padding: 2.4vw 3vw; background: rgba(251,243,223,.96);
+}
+.pregunta-quien { margin: 0; font-weight: 800; font-size: clamp(14px, 1.6vw, 22px); color: var(--rojo); text-transform: uppercase; letter-spacing: .08em; }
+.pregunta-texto { font-size: clamp(20px, 2.8vw, 40px); line-height: 1.15; text-wrap: balance; }
+.opciones { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1vw; }
+.opciones li {
+  display: flex; align-items: center; gap: 12px; padding: .9vw 1.2vw;
+  background: var(--papel-2); border: 3px solid var(--tinta); border-radius: 14px;
+  font-weight: 800; font-size: clamp(14px, 1.7vw, 24px); line-height: 1.2;
+}
+.opciones li::before {
+  content: attr(data-letra); flex: none; display: grid; place-items: center;
+  width: 1.9em; height: 1.9em; border-radius: 50%; border: 3px solid var(--tinta);
+  background: var(--crema); font-family: var(--display); font-weight: 400;
+}
+.opciones li.correcta, .opcion-tel.correcta { background: #b9e2b0; border-color: #24612b; box-shadow: 0 0 0 3px #24612b; }
+.opciones li.mal, .opcion-tel.mal { background: #f2b8b0; text-decoration: line-through; }
+.tiempo { width: 100%; height: 14px; border: 3px solid var(--tinta); border-radius: 999px; background: var(--crema); overflow: hidden; }
+.tiempo-barra { height: 100%; width: 100%; background: var(--rojo); }
+.explicacion { margin: 0; font-weight: 800; font-size: clamp(15px, 1.8vw, 24px); padding: .8vw 1.2vw; border-radius: 12px; border: 3px solid var(--tinta); }
+.explicacion.bien { background: #b9e2b0; }
+.explicacion.mal { background: #f2b8b0; }
+
+.marcador { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.marcador li {
+  display: flex; align-items: center; gap: 8px; padding: 4px 14px 4px 4px;
+  background: var(--crema); border: 3px solid var(--tinta); border-radius: 999px; box-shadow: 2px 2px 0 var(--tinta);
+  font-weight: 800;
+}
+.marcador li b { font-family: var(--display); font-weight: 400; font-size: 22px; color: var(--rojo); font-variant-numeric: tabular-nums; }
+.marcador li .punto { width: 26px; height: 26px; border-radius: 50%; border: 3px solid var(--tinta); background: var(--c); }
+.marcador li.fuera { opacity: .55; }
+.marcador li.fuera .nombre { text-decoration: line-through; }
+.marcador li small { color: var(--rojo); font-weight: 800; }
+
+/* celular */
+.tel-barra { display: flex; justify-content: space-between; align-items: center; font-weight: 800; color: var(--cafe); }
+.tel-barra b { color: var(--tinta); }
+.chip { padding: 2px 12px; border: 3px solid var(--tinta); border-radius: 999px; background: var(--crema); color: var(--tinta); font-family: var(--display); font-weight: 400; font-size: 18px; }
+.pregunta-tel { font-size: 24px; line-height: 1.2; text-wrap: balance; }
+.opciones-tel { width: 100%; display: grid; gap: 10px; }
+.opcion-tel {
+  display: flex; align-items: center; gap: 10px; width: 100%; padding: 12px 14px; text-align: left;
+  background: var(--crema); color: var(--tinta); border: 3px solid var(--tinta); border-radius: 14px;
+  box-shadow: 3px 3px 0 var(--tinta); font: 800 17px/1.25 var(--texto); cursor: pointer;
+}
+.opcion-tel span:first-child {
+  flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%;
+  border: 3px solid var(--tinta); background: var(--btn); color: var(--crema); font-family: var(--display); font-weight: 400;
+}
+.opcion-tel:disabled { cursor: default; box-shadow: none; }
+.opcion-tel.elegida { background: #f6e3a3; }
+.game-over { margin: 0; font-family: var(--display); font-size: 54px; line-height: 1; color: var(--rojo); -webkit-text-stroke: 2px var(--tinta); text-shadow: 4px 4px 0 var(--tinta); }
+.llanto { width: 300px; height: 260px; max-width: 100%; border: 4px solid var(--tinta); border-radius: 18px; background: var(--papel-2); }

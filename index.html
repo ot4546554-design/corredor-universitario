@@ -44,22 +44,37 @@
         <h2>Jugadores <span id="pCuenta">0/5</span></h2>
         <ul id="pLista" class="lista"></ul>
         <p id="pEstado" class="estado">Conectando con Firebase…</p>
-        <button id="pEmpezar" class="grande" type="button" disabled>Empezar carrera</button>
+        <p class="reglas">Se juegan 6 rondas. Puntos por llegada: 5, 4, 3, 2 y 1. El último de cada ronda responde una pregunta sobre el ensayo: si acierta gana 2 puntos, si falla queda eliminado.</p>
+        <button id="pEmpezar" class="grande" type="button" disabled>Empezar partida</button>
       </div>
     </section>
 
-    <section id="pCarrera" hidden>
-      <div class="escenario"><canvas id="pista" aria-label="Pista de carrera"></canvas></div>
+    <section id="pCarrera" class="partida" hidden>
+      <p id="pRonda" class="ronda">Ronda 1 de 6 · El pasillo</p>
+      <div class="escenario">
+        <canvas id="pista" aria-label="Pista de carrera"></canvas>
+        <div id="pPregunta" class="pregunta" hidden>
+          <p id="pqQuien" class="pregunta-quien"></p>
+          <h2 id="pqTexto" class="pregunta-texto"></h2>
+          <ol id="pqOpciones" class="opciones"></ol>
+          <div class="tiempo"><div id="pqTiempo" class="tiempo-barra"></div></div>
+          <p id="pqExplicacion" class="explicacion" hidden></p>
+        </div>
+      </div>
+      <ul id="pMarcador" class="marcador"></ul>
       <div id="pAcciones" class="acciones" hidden>
-        <button id="pOtra" class="accion" type="button">Otra carrera</button>
-        <button id="pVolver" class="accion" type="button">Volver a la sala de espera</button>
+        <button id="pSiguiente" class="grande" type="button">Siguiente ronda</button>
+        <button id="pTerminar" class="accion" type="button">Volver a la sala de espera</button>
       </div>
     </section>
   </main>
 
   <!-- ===== VISTA 3: CONTROL (celular) ===== -->
   <main id="vControl" class="vista control" hidden>
-    <p class="sala-chica">Sala <b id="cSala">····</b></p>
+    <header class="tel-barra">
+      <span>Sala <b id="cSala">····</b></span>
+      <span id="cPuntos" class="chip" hidden>0 pts</span>
+    </header>
 
     <section id="cNombre" class="paso" hidden>
       <h1 class="chico">Corredor Universitario</h1>
@@ -79,7 +94,7 @@
     <section id="cEspera" class="paso" hidden>
       <div id="cEsperaMini" class="mini-grande"></div>
       <h2>¡Listo, <span id="cEsperaNombre"></span>!</h2>
-      <p>Corres con <b id="cEsperaPersonaje"></b>. Mira la pantalla grande: la carrera empieza pronto.</p>
+      <p id="cEsperaTexto"></p>
       <button id="cCambiar" class="accion" type="button">Cambiar de personaje</button>
     </section>
 
@@ -90,9 +105,32 @@
       <p id="cToques" class="toques"></p>
     </section>
 
-    <section id="cFin" class="paso" hidden>
-      <p id="cPuesto" class="puesto"></p>
-      <p class="ayuda">Espera a que la pantalla grande inicie la siguiente carrera.</p>
+    <section id="cRonda" class="paso" hidden>
+      <p id="crRonda" class="eyebrow"></p>
+      <p id="crPuesto" class="puesto"></p>
+      <p id="crPuntos" class="quien"></p>
+      <p id="crSigue" class="ayuda"></p>
+    </section>
+
+    <section id="cPregunta" class="paso" hidden>
+      <p id="cpQuien" class="eyebrow"></p>
+      <h2 id="cpTexto" class="pregunta-tel"></h2>
+      <div id="cpOpciones" class="opciones-tel"></div>
+      <div class="tiempo"><div id="cpTiempo" class="tiempo-barra"></div></div>
+      <p id="cpEstado" class="ayuda"></p>
+    </section>
+
+    <section id="cEliminado" class="paso" hidden>
+      <p class="game-over">GAME OVER</p>
+      <canvas id="cLlanto" class="llanto" aria-label="Tu personaje llorando"></canvas>
+      <p id="ceTexto" class="quien">Quedaste eliminado. Puedes seguir mirando la partida.</p>
+    </section>
+
+    <section id="cPodio" class="paso" hidden>
+      <p class="eyebrow">Fin de la partida</p>
+      <p id="cpdTexto" class="puesto"></p>
+      <p id="cpdPuntos" class="quien"></p>
+      <p class="ayuda">Gracias por jugar. Mira el podio en la pantalla grande.</p>
     </section>
 
     <section id="cError" class="paso" hidden>
@@ -107,9 +145,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
-  <!-- Nuestro código, en orden: configuración → dibujos → lógica -->
+  <!-- Nuestro código, en orden: configuración → datos → dibujos → lógica -->
   <script src="config.js"></script>
+  <script src="preguntas.js"></script>
   <script src="dibujos.js"></script>
+  <script src="escenarios.js"></script>
   <script src="juego.js"></script>
 </body>
 </html>
