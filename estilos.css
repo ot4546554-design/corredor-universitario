@@ -1,0 +1,156 @@
+/* =========================================================
+   CORREDOR UNIVERSITARIO · estilos.css
+   Estilo de cartel de caricatura antigua.
+   ========================================================= */
+:root {
+  --papel: #ecdcb8;
+  --papel-2: #f7eed8;
+  --tinta: #1d1714;
+  --rojo: #c8362b;
+  --cafe: #7d522e;
+  --crema: #fbf3df;
+  --btn: #d64933;              /* cambia según el personaje elegido */
+  --display: "Luckiest Guy", "Arial Black", Impact, sans-serif;
+  --texto: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  background-color: var(--papel);
+  background-image: radial-gradient(rgba(29,23,20,.07) 1px, transparent 1px);
+  background-size: 6px 6px;
+  color: var(--tinta);
+  font-family: var(--texto);
+  font-size: 16px;
+  line-height: 1.5;
+}
+.vista {
+  max-width: 1120px; margin: 0 auto;
+  padding: max(20px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right))
+           max(28px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  display: flex; flex-direction: column; gap: 20px;
+}
+
+/* ---------- Tipografía ---------- */
+h1 {
+  margin: 0; font-family: var(--display); font-weight: 400;
+  font-size: clamp(40px, 8vw, 72px); line-height: .95; letter-spacing: .02em;
+  color: var(--rojo); -webkit-text-stroke: 2px var(--tinta);
+  text-shadow: 4px 4px 0 var(--tinta); text-wrap: balance;
+}
+h1.chico { font-size: clamp(26px, 5vw, 36px); text-shadow: 3px 3px 0 var(--tinta); }
+h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 26px; letter-spacing: .03em; }
+.eyebrow { margin: 0; font-weight: 800; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--cafe); }
+.lead { margin: 0; font-size: 18px; max-width: 50ch; }
+.ayuda { margin: 0; color: var(--cafe); font-weight: 600; }
+
+/* ---------- Botones y campos ---------- */
+.grande, .accion {
+  border: 3px solid var(--tinta); cursor: pointer; color: var(--tinta);
+  font-family: var(--texto); font-weight: 800; text-decoration: none; text-align: center;
+}
+.grande {
+  padding: 14px 22px; border-radius: 16px; background: var(--rojo); color: var(--crema);
+  font-family: var(--display); font-weight: 400; font-size: 22px; letter-spacing: .04em;
+  box-shadow: 0 6px 0 var(--tinta); text-shadow: 2px 2px 0 var(--tinta);
+}
+.grande:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--tinta); }
+.grande:disabled { filter: grayscale(.8); opacity: .55; cursor: not-allowed; transform: none; }
+.accion {
+  display: inline-block; padding: 8px 16px; border-radius: 999px; background: var(--crema);
+  font-size: 15px; box-shadow: 2px 2px 0 var(--tinta);
+}
+.accion:active { transform: translate(2px, 2px); box-shadow: none; }
+input {
+  width: 100%; padding: 12px 14px; border: 3px solid var(--tinta); border-radius: 12px;
+  background: var(--crema); color: var(--tinta); font: 800 20px var(--texto);
+}
+button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px dashed var(--rojo); outline-offset: 3px; }
+
+/* ---------- Inicio ---------- */
+.inicio { min-height: 100vh; justify-content: center; max-width: 560px; }
+.unirme { display: flex; flex-direction: column; gap: 10px; }
+.unirme label { font-weight: 800; }
+.fila { display: flex; gap: 10px; }
+.fila input { text-transform: uppercase; letter-spacing: .3em; }
+
+/* ---------- Pantalla grande ---------- */
+.barra { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.sala { margin: 0; font-weight: 800; font-size: 18px; }
+.sala b {
+  display: inline-block; margin-left: 6px; padding: 2px 14px; border: 3px solid var(--tinta);
+  border-radius: 10px; background: var(--crema); font-family: var(--display); font-weight: 400;
+  font-size: 34px; letter-spacing: .15em; box-shadow: 3px 3px 0 var(--tinta);
+}
+.lobby { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 760px) { .lobby { grid-template-columns: minmax(0, 1fr); } }
+.qr-caja, .jugadores-caja {
+  background: var(--papel-2); border: 4px solid var(--tinta); border-radius: 18px;
+  box-shadow: 6px 6px 0 var(--tinta); padding: 20px; display: flex; flex-direction: column; gap: 12px;
+}
+.qr-caja { align-items: center; text-align: center; }
+.qr { padding: 12px; background: var(--crema); border: 3px solid var(--tinta); border-radius: 12px; }
+.qr img, .qr canvas { display: block; max-width: 100%; height: auto; }
+.link { margin: 0; font-size: 13px; word-break: break-all; color: var(--cafe); }
+.jugadores-caja h2 span { color: var(--cafe); font-size: 20px; }
+.lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.lista li {
+  display: flex; align-items: center; gap: 12px; padding: 6px 12px 6px 6px;
+  background: var(--crema); border: 3px solid var(--tinta); border-radius: 14px;
+  box-shadow: inset -10px 0 0 var(--c, #bbb);
+}
+.lista li strong { display: block; font-size: 20px; line-height: 1.1; }
+.lista li small { color: var(--cafe); font-weight: 600; }
+.lista .vacio { box-shadow: none; justify-content: center; padding: 18px; color: var(--cafe); font-weight: 600; border-style: dashed; }
+.estado { margin: 0; font-weight: 600; color: var(--cafe); }
+
+.escenario {
+  border: 4px solid var(--tinta); border-radius: 18px; overflow: hidden;
+  box-shadow: 7px 7px 0 var(--tinta); background: var(--tinta);
+}
+.escenario canvas { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; }
+.acciones { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+/* ---------- Control (celular) ---------- */
+.control { min-height: 100vh; max-width: 520px; text-align: center; overscroll-behavior: none; }
+.sala-chica { margin: 0; font-weight: 800; color: var(--cafe); }
+.paso { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.paso .unirme { width: 100%; text-align: left; }
+.personajes { width: 100%; display: grid; gap: 10px; }
+.personaje {
+  display: grid; grid-template-columns: 56px minmax(0, 1fr); align-items: center; gap: 10px;
+  padding: 6px 12px 6px 6px; background: var(--crema); color: var(--tinta);
+  border: 3px solid var(--tinta); border-radius: 14px; box-shadow: 3px 3px 0 var(--tinta), inset -12px 0 0 var(--c);
+  font: 800 18px/1.2 var(--texto); text-align: left; cursor: pointer;
+}
+.personaje small { display: block; font-weight: 600; font-size: 13px; color: var(--cafe); }
+.personaje:disabled { opacity: .45; cursor: not-allowed; box-shadow: none; }
+.personaje.mio { outline: 4px solid var(--c); outline-offset: 2px; }
+.mini-grande canvas { display: block; }
+
+.juego { justify-content: center; flex: 1; gap: 18px; }
+.quien { margin: 0; font-weight: 800; }
+.cuenta { margin: 0; font-family: var(--display); font-size: 40px; line-height: 1; color: var(--rojo); -webkit-text-stroke: 1.5px var(--tinta); }
+.boton-toque {
+  width: min(270px, 72vw); aspect-ratio: 1; border-radius: 50%;
+  background: var(--btn); color: var(--crema); border: 7px solid var(--tinta);
+  box-shadow: 0 12px 0 var(--tinta), inset 0 -14px 0 rgba(0,0,0,.18), inset 0 12px 0 rgba(255,255,255,.22);
+  font-family: var(--display); font-size: 48px; letter-spacing: .03em; text-shadow: 3px 3px 0 var(--tinta);
+  cursor: pointer; touch-action: none; user-select: none; -webkit-user-select: none;
+  -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent;
+  transition: transform .05s, box-shadow .05s;
+}
+.boton-toque.golpe { transform: translateY(9px); box-shadow: 0 3px 0 var(--tinta), inset 0 -14px 0 rgba(0,0,0,.18), inset 0 12px 0 rgba(255,255,255,.22); }
+.boton-toque:disabled { filter: grayscale(.85); opacity: .5; }
+.toques { margin: 0; font-weight: 800; font-variant-numeric: tabular-nums; min-height: 1.5em; }
+.puesto { margin: 0; font-family: var(--display); font-size: 34px; line-height: 1.1; }
+.error { margin: 0; font-weight: 800; color: var(--rojo); font-size: 18px; }
+.aviso {
+  position: fixed; left: 50%; transform: translateX(-50%);
+  bottom: max(20px, env(safe-area-inset-bottom)); margin: 0; padding: 8px 14px;
+  border: 3px solid var(--tinta); border-radius: 12px; background: var(--crema);
+  color: var(--rojo); font-weight: 800; box-shadow: 3px 3px 0 var(--tinta);
+}
+@media (prefers-reduced-motion: reduce) { .boton-toque, .grande { transition: none; } }

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Corredor Universitario</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Nunito:wght@400;600;800&display=swap">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+  <!-- ===== VISTA 1: INICIO (cuando se abre el link sin nada más) ===== -->
+  <main id="vInicio" class="vista inicio" hidden>
+    <p class="eyebrow">Juego para 2 a 5 jugadores</p>
+    <h1>Corredor Universitario</h1>
+    <p class="lead">Una pantalla grande muestra la carrera y cada celular es un control.</p>
+    <button id="iCrear" class="grande" type="button">Crear sala en esta pantalla</button>
+    <form id="iUnirme" class="unirme">
+      <label for="iCodigo">¿Ya hay una sala? Escribe el código</label>
+      <div class="fila">
+        <input id="iCodigo" maxlength="4" autocomplete="off" autocapitalize="characters" placeholder="ABCD">
+        <button class="accion" type="submit">Entrar</button>
+      </div>
+    </form>
+  </main>
+
+  <!-- ===== VISTA 2: PANTALLA GRANDE (proyector) ===== -->
+  <main id="vPantalla" class="vista pantalla" hidden>
+    <header class="barra">
+      <h1 class="chico">Corredor Universitario</h1>
+      <p class="sala">Sala <b id="pCodigo">····</b></p>
+    </header>
+
+    <section id="pLobby" class="lobby">
+      <div class="qr-caja">
+        <div id="qr" class="qr"></div>
+        <p class="ayuda">Escanea el código con la cámara del celular</p>
+        <p class="link" id="pLink"></p>
+        <a id="pPrueba" class="accion" target="_blank" rel="noopener">Abrir un control de prueba</a>
+      </div>
+      <div class="jugadores-caja">
+        <h2>Jugadores <span id="pCuenta">0/5</span></h2>
+        <ul id="pLista" class="lista"></ul>
+        <p id="pEstado" class="estado">Conectando con Firebase…</p>
+        <button id="pEmpezar" class="grande" type="button" disabled>Empezar carrera</button>
+      </div>
+    </section>
+
+    <section id="pCarrera" hidden>
+      <div class="escenario"><canvas id="pista" aria-label="Pista de carrera"></canvas></div>
+      <div id="pAcciones" class="acciones" hidden>
+        <button id="pOtra" class="accion" type="button">Otra carrera</button>
+        <button id="pVolver" class="accion" type="button">Volver a la sala de espera</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== VISTA 3: CONTROL (celular) ===== -->
+  <main id="vControl" class="vista control" hidden>
+    <p class="sala-chica">Sala <b id="cSala">····</b></p>
+
+    <section id="cNombre" class="paso" hidden>
+      <h1 class="chico">Corredor Universitario</h1>
+      <form id="cFormNombre" class="unirme">
+        <label for="cNombreInput">¿Cómo te llamas?</label>
+        <input id="cNombreInput" maxlength="14" autocomplete="off" placeholder="Tu nombre" required>
+        <button class="grande" type="submit">Entrar a la sala</button>
+      </form>
+    </section>
+
+    <section id="cElegir" class="paso" hidden>
+      <h2>Elige tu corredor</h2>
+      <p class="ayuda">El primero que lo elige se lo lleva.</p>
+      <div id="cPersonajes" class="personajes"></div>
+    </section>
+
+    <section id="cEspera" class="paso" hidden>
+      <div id="cEsperaMini" class="mini-grande"></div>
+      <h2>¡Listo, <span id="cEsperaNombre"></span>!</h2>
+      <p>Corres con <b id="cEsperaPersonaje"></b>. Mira la pantalla grande: la carrera empieza pronto.</p>
+      <button id="cCambiar" class="accion" type="button">Cambiar de personaje</button>
+    </section>
+
+    <section id="cJuego" class="paso juego" hidden>
+      <p id="cQuien" class="quien"></p>
+      <p id="cCuenta" class="cuenta">Prepárate…</p>
+      <button id="cBoton" class="boton-toque" type="button" aria-label="Tocar para correr" disabled>¡TOCA!</button>
+      <p id="cToques" class="toques"></p>
+    </section>
+
+    <section id="cFin" class="paso" hidden>
+      <p id="cPuesto" class="puesto"></p>
+      <p class="ayuda">Espera a que la pantalla grande inicie la siguiente carrera.</p>
+    </section>
+
+    <section id="cError" class="paso" hidden>
+      <p id="cErrorTxt" class="error"></p>
+      <a class="accion" href="./">Volver al inicio</a>
+    </section>
+
+    <p id="cAviso" class="aviso" role="status" hidden></p>
+  </main>
+
+  <!-- Librerías: QR y Firebase (versión "compat", la más sencilla de usar) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <!-- Nuestro código, en orden: configuración → dibujos → lógica -->
+  <script src="config.js"></script>
+  <script src="dibujos.js"></script>
+  <script src="juego.js"></script>
+</body>
+</html>
